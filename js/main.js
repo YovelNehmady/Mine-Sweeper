@@ -22,12 +22,6 @@ function onInitGame() {
 
 function onCellClicked(elCell, i, j) {
     gBoard[i][j].isShown = true
-
-
-console.log(elCell.querySelector('span').hidden);
-elCell.querySelector('span').hidden = 'false'
-console.log(elCell.querySelector('span').hidden);
-
     renderBoard(gBoard)
     // console.log(elCell.innerText)
 }
