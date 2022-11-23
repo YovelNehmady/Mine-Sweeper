@@ -54,9 +54,10 @@ function timer() {
     timeStart()
 
 }
+
 function onFirstClick() {
     getRandMines()
-    // timer()
+    timer()
 }
 
 function onCellClicked(elCell, i, j) {
