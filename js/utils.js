@@ -1,22 +1,5 @@
 
-function buildBoard() {
-  var size = glevel.size
-  const board = []
-  for (var i = 0; i < size; i++) {
-    board.push([])
-    for (var j = 0; j < size; j++) {
-      board[i][j] = {
-        minesAroundCount: 0,
-        isShown: false,
-        isMine: false,
-        isMarked: true
-      }
-    }
-  }
-  board[2][1].isMine = board[0][2].isMine = true
-  // board[2][1].isShown = board[0][2].isShown = true
-  return board
-}
+
 
 function setMinesNegsCount() {
   for (var i = 0; i < glevel.size; i++) {
@@ -27,7 +10,7 @@ function setMinesNegsCount() {
 }
 
 function negsCount(cellI, cellJ) {
-  var mineNegsCount = 0
+  var mineNegsCount = null
   for (var i = cellI - 1; i <= cellI + 1; i++) {
     if (i < 0 || i >= glevel.size) continue
     for (var j = cellJ - 1; j <= cellJ + 1; j++) {
@@ -47,10 +30,15 @@ function renderBoard(board) {
     strHTML += '<tr>'
     for (var j = 0; j < board[0].length; j++) {
       var currCell = board[i][j]
-if(gBoard[i][j].isShown){
-  cell = (currCell.isMine) ? MINE : `${currCell.minesAroundCount}`
-} else cell = ''
-      strHTML += `<td class="cell" onclick="onCellClicked(this,${i}, ${j})">${cell}</td>`
+      ////check if switch can work here 
+      if (currCell.isShown) {
+        cell = (currCell.isMine) ? MINE : currCell.minesAroundCount
+        if (!cell) cell = EMPTY
+      } else cell = EMPTY
+
+      // if (currCell.isMarked) cell = FLAG
+
+      strHTML += `<td class="cell" oncontextmenu="onCellMarked(this,${i}, ${j})" onclick="onCellClicked(this,${i}, ${j})">${cell}</td>`
     }
     strHTML += '</tr>'
   }
@@ -58,6 +46,48 @@ if(gBoard[i][j].isShown){
   elBoard.innerHTML = strHTML
 }
 
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
 
 
+/////timer
+
+const watch = document.querySelector(".timer")
+var millisecound = 0
+var timer
+
+function timeStart() {
+
+  // watch.style.display = "block"
+  // watch.style.color = "black"
+  clearInterval(timer)
+  timer = setInterval(() => {
+    millisecound += 10;
+
+    let dateTimer = new Date(millisecound);
+
+    watch.innerHTML =
+      ('0' + dateTimer.getUTCMinutes()).slice(-2) + ':' +
+      ('0' + dateTimer.getUTCSeconds()).slice(-2) + ':' +
+      ('0' + dateTimer.getUTCMilliseconds()).slice(-3, -1);
+
+
+  }, 10);
+}
+
+
+function timePaused() {
+  //   watch.style.color = "red";
+  clearInterval(timer);
+}
+
+function timeReset() {
+  // watch.style.color = "black";
+  setInterval(timer)
+  millisecound = 0;
+  watch.innerHTML = "00:00:00";
+}
 
