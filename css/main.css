@@ -1,0 +1,19 @@
+* {
+    background-color: aqua;
+}
+
+table {
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+td {
+    text-align: center;
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+}
+
+
