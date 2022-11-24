@@ -36,9 +36,10 @@ function renderBoard(board) {
         if (!cell) cell = EMPTY
       } else cell = EMPTY
 
-      // if (currCell.isMarked) cell = FLAG
+      var classList = currCell.isShown && cell === EMPTY ? 'isShow' : ''
 
-      strHTML += `<td class="cell" oncontextmenu="onCellMarked(this,${i}, ${j})" onclick="onCellClicked(this,${i}, ${j})">${cell}</td>`
+      if (currCell.isMarked) cell = FLAG
+      strHTML += `<td class="cell ${classList}" oncontextmenu="onCellMarked(this,${i}, ${j})" onclick="onCellClicked(this,${i}, ${j})">${cell}</td>`
     }
     strHTML += '</tr>'
   }
@@ -81,7 +82,7 @@ function timeStart() {
 
 function timePaused() {
   //   watch.style.color = "red";
-  clearInterval(timer);
+  clearInterval(timer)
 }
 
 function timeReset() {
