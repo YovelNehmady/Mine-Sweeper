@@ -1,5 +1,4 @@
-
-
+'use strict'
 
 function setMinesNegsCount() {
   for (var i = 0; i < glevel.size; i++) {
@@ -22,7 +21,10 @@ function negsCount(cellI, cellJ) {
   return mineNegsCount
 }
 
-
+function renderMood(mood) {
+  document.querySelector('.mood').innerText = mood
+}
+////to add renders for shown and markd
 function renderBoard(board) {
   var cell
   var strHTML = ''
@@ -53,6 +55,46 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
+function negsRevealed(cellI, cellJ, shown) {
+  console.log(shown)
+  for (var i = cellI - 1; i <= cellI + 1; i++) {
+    if (i < 0 || i >= glevel.size) continue
+    for (var j = cellJ - 1; j <= cellJ + 1; j++) {
+      if (j < 0 || j >= glevel.size) continue
+      gBoard[i][j].isShown = (shown) ? true : false
+    }
+  }
+  renderBoard(gBoard)
+}
+
+
+function renderLife() {
+  var str = ``
+  for (var i = 0; i < gGame.lifeCount; i++) {
+    str += `❤️`
+  }
+  document.querySelector(".life").innerText = `${str}`
+}
+
+function renderHintCount() {
+  var str = ''
+  for (var i = 0; i < gGame.hintCount; i++) {
+    str += '💡'
+  }
+  document.querySelector('.hint').innerText = str
+}
+
+
+function renderPageMsg() {
+  renderHintCount()
+  renderMood(NORMAL)
+  renderLife()
+}
+
+
+
+
+
 
 /////timer
 
@@ -62,8 +104,6 @@ var timer
 
 function timeStart() {
 
-  // watch.style.display = "block"
-  // watch.style.color = "black"
   clearInterval(timer)
   timer = setInterval(() => {
     millisecound += 10;
@@ -79,18 +119,10 @@ function timeStart() {
   }, 10);
 }
 
-
 function setTimerAgain() {
   millisecound = 0
   watch.innerHTML = "00:00:00"
   clearInterval(timer)
-}
-
-function timeReset() {
-  // watch.style.color = "black";
-  setInterval(timer)
-  millisecound = 0;
-  watch.innerHTML = "00:00:00";
 }
 
 function timePaused() {
