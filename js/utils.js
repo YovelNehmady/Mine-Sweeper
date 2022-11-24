@@ -38,7 +38,7 @@ function renderBoard(board) {
         if (!cell) cell = EMPTY
       } else cell = EMPTY
 
-      var classList = currCell.isShown && cell === EMPTY ? 'isShow' : ''
+      var classList = currCell.isShown? 'isShow' : ''
       if (currCell.isSafe) classList = 'safe'
       if (currCell.isMarked) cell = FLAG
       strHTML += `<td class="cell ${classList}" oncontextmenu="onCellMarked(this,${i}, ${j})" onclick="onCellClicked(this,${i}, ${j})">${cell}</td>`

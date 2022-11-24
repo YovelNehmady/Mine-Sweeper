@@ -6,28 +6,32 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body oncontextmenu="return false" onload="onInitGame()" >
+<body oncontextmenu="return false" onload="onInitGame()">
     <h1>Mine Sweeper</h1>
     <div class="modalMsg"></div>
-    <div class= "life" >❤️❤️❤️</div>
-    <button onclick="onChangeLevel(4,2)" >Beginner</button>
-    <button onclick="onChangeLevel(8,14)" >Medium</button>
-    <button onclick="onChangeLevel(12,32)" >Expert</button>
+    <br>
     <div class="timer">00:00:00</div>
-    <button class="hint" onclick="onHintMode()">💡💡💡</button>
-    <button class="safeBtn" onclick="onSafeClick()">🛟🛟🛟</button>
-    <button class="mood" onclick="onReset()">😃</button>
-    <!-- <button class="manually" onclick="manuallyMines()">Manually</button> -->
+    <div class="life" title="ℹ️ Lifes">❤️❤️❤️</div>
+    <br>
+    <button onclick="onChangeLevel(4,2)" title="ℹ️ 16 cells & 2 mines">Beginner</button>
+    <button onclick="onChangeLevel(8,14)" title="ℹ️ 64 cells & 14 mines">Medium</button>
+    <button onclick="onChangeLevel(12,32)" title="ℹ️ 144 cells & 32 mines">Expert</button>
+   <br>
 
-    <table cellpadding="10">
+    <table>
         <tbody class="board">
 
         </tbody>
     </table>
+    <br>
+    <button class="hint" onclick="onHintMode()"
+        title="ℹ️  Select a cell whose neighbors you want to reveal">💡💡💡</button>
+    <button class="mood" onclick="onReset()" title="ℹ️ Click to reset the game">😃</button>
+    <button class="safeBtn" onclick="onSafeClick()" title="ℹ️ Click to reveal a safe cell">🛟🛟🛟</button>
 
-<footer>
-    <p>By Yovel Nehmady</p>
-</footer>
+    <footer>
+        <p>By Yovel Nehmady</p>
+    </footer>
 
     <script src="js/utils.js"></script>
     <script src="js/mines.js"></script>

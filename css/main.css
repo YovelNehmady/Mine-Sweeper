@@ -1,22 +1,79 @@
 * {
     text-align: center;
+    background-color: whitesmoke;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-table {
-    margin: auto;
-    margin-top: 20px;
+h1 {
+    margin: 70px 0px 20px 0px;
+    font-style: italic
+}
+
+button {
+    height: 30px;
+    width: 75px;
+    padding: 5px 15px;
     border-radius: 5px;
-    border: 1px solid black;
+    border: rgb(67, 79, 105) solid 2px;
+    background-color: #fff;
+    margin: 15px 7px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(67, 79, 105);
+
+}
+
+
+table {
+    display: inline-block;
+    margin-top: 20px;
+    border: 2px solid rgb(67, 79, 105);
+    border-collapse: collapse;
+    border-radius: 5px;
 }
 
 td {
-    border: 1px solid black;
+    border: 2px solid rgb(67, 79, 105);
     width: 50px;
     height: 50px;
 }
 
+.life {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.timer {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.hint{
+    height: 30px;
+    width: 90px;
+    background-color:rgb(217, 220, 225);
+    border: none;
+
+}
+.mood{
+    height: 30px;
+    width: 45px;
+    background-color: rgb(217, 220, 225);
+    border: none;
+
+}
+.safeBtn{
+    height: 30px;
+    width: 90px;
+    background-color: rgb(217, 220, 225);
+    border: none;
+}
+
+
 .isShow {
-    background-color: gray;
+    background-color: rgb(217, 220, 225);
 }
 
 .safe {
