@@ -13,9 +13,10 @@ var gGame = {
     isTimerOn: false,
     isHint: false,
     hintCount: 0,
-    shownCount: 0,
-    markedCount: 0,
-    lifeCount: 0
+    // shownCount: 0,
+    // markedCount: 0,
+    lifeCount: 0,
+    safeCount: 0
 
 }
 var glevel = {
@@ -30,6 +31,7 @@ function onInitGame() {
     renderBoard(gBoard)
     gGame.lifeCount = 3
     gGame.hintCount = 3
+    gGame.safeCount = 3
     renderPageMsg()
 }
 
@@ -43,20 +45,21 @@ function buildBoard() {
                 minesAroundCount: null,
                 isShown: false,
                 isMine: false,
-                isMarked: false
+                isMarked: false,
+                isSafe: false
             }
         }
     }
     return board
 }
 
-function onReset(){
+function onReset() {
     setTimerAgain()
     gGame.isFirstCkick = true
     gGame.isTimerOn = false
     onInitGame()
     document.querySelector('.modalMsg').innerText = ''
-    
+
 }
 
 function onChangeLevel(size, mines) {
@@ -71,6 +74,16 @@ function onChangeLevel(size, mines) {
 
 function onHintMode() {
     gGame.isHint = true
+}
+
+function onSafeClick() {
+    gGame.safeCount--
+    var randCell = getRandSafeCell()
+    randCell.isSafe = true
+    renderBoard(gBoard)
+    randCell.isSafe = false
+    setTimeout(renderBoard, 1500, gBoard)
+    renderSafeCount()
 }
 
 function hintMode(currI, currJ) {

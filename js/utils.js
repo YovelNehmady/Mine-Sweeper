@@ -24,7 +24,7 @@ function negsCount(cellI, cellJ) {
 function renderMood(mood) {
   document.querySelector('.mood').innerText = mood
 }
-////to add renders for shown and markd
+
 function renderBoard(board) {
   var cell
   var strHTML = ''
@@ -39,7 +39,7 @@ function renderBoard(board) {
       } else cell = EMPTY
 
       var classList = currCell.isShown && cell === EMPTY ? 'isShow' : ''
-
+      if (currCell.isSafe) classList = 'safe'
       if (currCell.isMarked) cell = FLAG
       strHTML += `<td class="cell ${classList}" oncontextmenu="onCellMarked(this,${i}, ${j})" onclick="onCellClicked(this,${i}, ${j})">${cell}</td>`
     }
@@ -67,8 +67,7 @@ function negsRevealed(cellI, cellJ, shown) {
   renderBoard(gBoard)
 }
 
-
-function renderLife() {
+function renderLifeCount() {
   var str = ``
   for (var i = 0; i < gGame.lifeCount; i++) {
     str += `❤️`
@@ -85,10 +84,31 @@ function renderHintCount() {
 }
 
 
+function renderSafeCount() {
+  var str = ''
+  for (var i = 0; i < gGame.safeCount; i++) {
+    str += '🛟'
+  }
+  document.querySelector('.safeBtn').innerText = str
+}
+
+function getRandSafeCell() {
+  var cleearCells = []
+  for (var i = 0; i < glevel.size; i++) {
+    for (var j = 0; j < glevel.size; j++) {
+      if (gBoard[i][j].isShown) continue
+      if (!gBoard[i][j].isMine) cleearCells.push(gBoard[i][j])
+    }
+  }
+  return cleearCells[getRandomInt(0, cleearCells.length)]
+}
+
+////to add renders for shown and markd
 function renderPageMsg() {
   renderHintCount()
   renderMood(NORMAL)
-  renderLife()
+  renderLifeCount()
+  renderSafeCount()
 }
 
 
