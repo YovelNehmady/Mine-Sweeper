@@ -3,11 +3,13 @@
 const MINE = '💣'
 const FLAG = '🚩'
 const EMPTY = ``
+var gLife = ''
 var gBoard
 
 var gGame = {
     isOn: false,
     isFirstCkick: true,
+    isTimerOn: false,
     shownCount: 0,
     markedCount: 0,
     secsPassed: 0
@@ -18,12 +20,12 @@ var glevel = {
     mines: 2
 }
 
-function changeLevel(size, mines) {
-    timePaused()
-    watch.innerHTML = "00:00:00"
+function onChangeLevel(size, mines) {
+    setTimerAgain()
     glevel.size = size
     glevel.mines = mines
     gGame.isFirstCkick = true
+    gGame.isTimerOn = false
     onInitGame()
 }
 
@@ -55,6 +57,7 @@ function getRandMines(currI, currJ) {
     for (var i = 0; i < minesCount; i++) {
         var indexI = getRandomInt(0, size)
         var indexJ = getRandomInt(0, size)
+        ///////
         if (currI === indexI && currJ === indexJ) {
             indexJ = getRandomInt(0, size)
             indexI = getRandomInt(0, size)
@@ -70,7 +73,10 @@ function getRandMines(currI, currJ) {
 
 function onFirstClick(cueeI, currJ) {
     getRandMines(cueeI, currJ)
-    timeStart()
+    if (gGame.isTimerOn === false) {
+        timeStart()
+        gGame.isTimerOn = true
+    }
     gGame.isOn = true
     gGame.isFirstCkick = false
 }
@@ -121,6 +127,10 @@ function showAllMines() {
 
 function onCellMarked(elCell, i, j) {
     if (!gGame.isOn) return
+    if (gGame.isTimerOn === false) {
+        timeStart()
+        gGame.isTimerOn = true
+    }
     if (gBoard[i][j].isShown) return
     if (gBoard[i][j].isMarked) {
         unMarkedCell(elCell, i, j)

@@ -80,8 +80,9 @@ function timeStart() {
 }
 
 
-function timePaused() {
-  //   watch.style.color = "red";
+function setTimerAgain() {
+  millisecound = 0
+  watch.innerHTML = "00:00:00"
   clearInterval(timer)
 }
 
@@ -90,5 +91,9 @@ function timeReset() {
   setInterval(timer)
   millisecound = 0;
   watch.innerHTML = "00:00:00";
+}
+
+function timePaused() {
+  clearInterval(timer)
 }
 
