@@ -12,6 +12,7 @@ var gGame = {
     isFirstCkick: true,
     isTimerOn: false,
     isHint: false,
+    // isManual: false,
     hintCount: 0,
     // shownCount: 0,
     // markedCount: 0,
@@ -103,6 +104,16 @@ function gameOver(pos) {
     renderMood(pos)
 
 }
+//////////////////
+
+// function manuallyMines(){
+//     if (gGame.isOn) return
+//     gGame.isManual = true
+// }
+
+// function onManuallyMode(){
+
+// }
 
 
 

@@ -2,7 +2,7 @@
 
 function onFirstClick(cueeI, currJ) {
     getRandMines(cueeI, currJ)
-    if (gGame.isTimerOn === false) {
+    if (!gGame.isTimerOn) {
         timeStart()
         gGame.isTimerOn = true
     }
@@ -12,7 +12,11 @@ function onFirstClick(cueeI, currJ) {
 
 function onCellClicked(elCell, i, j) {
     if (gGame.isFirstCkick) onFirstClick(i, j)
-    if (gGame.isOn === false) return
+    if (!gGame.isOn) return
+    if (gGame.isManual) {
+        onManuallyMode(i, j)
+        return
+    }
     if (gBoard[i][j].isMarked) return
     if (gBoard[i][j].isShown) return
     if (gGame.isHint) hintMode(i, j) /////

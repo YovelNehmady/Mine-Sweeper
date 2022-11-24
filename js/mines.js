@@ -30,7 +30,7 @@ function stepOnMine() {
 }
 
 function oneLifeUsed() {
-    renderLife()
+    renderLifeCount()
     renderMood(SAD)
     setTimeout(renderMood, 1000, NORMAL)
 }
