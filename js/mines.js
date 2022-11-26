@@ -31,6 +31,10 @@ function stepOnMine() {
 
 function oneLifeUsed() {
     renderLifeCount()
+    if (isVictory()) {
+        gameOver(WIN)
+        return
+    }
     renderMood(SAD)
     setTimeout(renderMood, 1000, NORMAL)
 }

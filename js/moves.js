@@ -13,13 +13,16 @@ function onFirstClick(cueeI, currJ) {
 function onCellClicked(elCell, i, j) {
     if (gGame.isFirstCkick) onFirstClick(i, j)
     if (!gGame.isOn) return
-    if (gGame.isManual) {
-        onManuallyMode(i, j)
-        return
-    }
+    // if (gGame.isManual) {
+    //     onManuallyMode(i, j)
+    //     return
+    // }
     if (gBoard[i][j].isMarked) return
     if (gBoard[i][j].isShown) return
-    if (gGame.isHint) hintMode(i, j) /////
+    if (gGame.isHint) {
+        hintMode(i, j)
+        return
+    }
     gBoard[i][j].isShown = true
     if (!gBoard[i][j].minesAroundCount) expandShown(i, j)
     renderBoard(gBoard)
@@ -59,7 +62,7 @@ function onCellMarked(elCell, i, j) {
     }
     gBoard[i][j].isMarked = true
     elCell.innerText = FLAG
-    if (isVictory()) gameOver('won')
+    if (isVictory()) gameOver(WIN)
 }
 
 function unMarkedCell(elCell, i, j) {

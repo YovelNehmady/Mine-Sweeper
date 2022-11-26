@@ -9,14 +9,15 @@
 <body oncontextmenu="return false" onload="onInitGame()">
     <h1>Mine Sweeper</h1>
     <div class="modalMsg">There are <span></span> Mines among us, lets reveal them all</div>
+    <button class="darkBtn dark" onclick="onDarkMode()">Dark mode</button>
     <br>
     <div class="timer">00:00:00</div>
     <div class="life" title="ℹ️ Lifes">❤️</div>
     <br>
-    <button onclick="onChangeLevel(4,2)" title="ℹ️ 16 cells & 2 mines">Beginner</button>
-    <button onclick="onChangeLevel(8,14)" title="ℹ️ 64 cells & 14 mines">Medium</button>
-    <button onclick="onChangeLevel(12,32)" title="ℹ️ 144 cells & 32 mines">Expert</button>
-   <br>
+    <button class="btn1" onclick="onChangeLevel(4,2)" title="ℹ️ 16 cells & 2 mines">Beginner</button>
+    <button class="btn2" onclick="onChangeLevel(8,14)" title="ℹ️ 64 cells & 14 mines">Medium</button>
+    <button class="btn3" onclick="onChangeLevel(12,32)" title="ℹ️ 144 cells & 32 mines">Expert</button>
+    <br>
 
     <table>
         <tbody class="board">

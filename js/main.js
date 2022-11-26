@@ -12,6 +12,7 @@ var gGame = {
     isFirstCkick: true,
     isTimerOn: false,
     isHint: false,
+    isDarkMode : false,
     // isManual: false,
     hintCount: 0,
     // shownCount: 0,
@@ -99,24 +100,25 @@ function hintMode(currI, currJ) {
 function gameOver(pos) {
     gGame.isOn = false
     timePaused()
-    var msg = (pos === SAD) ? `maybe next time...` : `you won!!`
+    var msg = (pos === SAD) ? `Maybe next time...` : `Good job, you revealed them all!!`
     document.querySelector('.modalMsg').innerText = msg
     renderMood(pos)
 
 }
 
-//////////////////
-
-// function manuallyMines(){
-//     if (gGame.isOn) return
-//     gGame.isManual = true
-// }
-
-// function onManuallyMode(){
-
-// }
-
-
+function onDarkMode() {
+    gGame.isDarkMode = !gGame.isDarkMode 
+    document.querySelector('body').classList.toggle('dark')
+    document.querySelector('.btn1').classList.toggle('dark')
+    document.querySelector('.btn2').classList.toggle('dark')
+    document.querySelector('.btn3').classList.toggle('dark')
+    document.querySelector('.hint').classList.toggle('dark')
+    document.querySelector('.mood').classList.toggle('dark')
+    document.querySelector('.safeBtn').classList.toggle('dark')
+    document.querySelector('.darkBtn').classList.toggle('dark')
+    var str = (!gGame.isDarkMode) ? `Dark mode` : `Light mode`
+    document.querySelector('.darkBtn').innerText = str
+}
 
 
 
