@@ -30,7 +30,7 @@ var gBoard
 function onInitGame() {
     gBoard = buildBoard()
     renderBoard(gBoard)
-    gGame.lifeCount = 3
+    gGame.lifeCount = (glevel.mines === 2) ? 2 : 3
     gGame.hintCount = 3
     gGame.safeCount = 3
     renderPageMsg()
@@ -59,7 +59,7 @@ function onReset() {
     gGame.isFirstCkick = true
     gGame.isTimerOn = false
     onInitGame()
-    document.querySelector('.modalMsg').innerText = ''
+    // document.querySelector('.modalMsg').innerText = ''
 
 }
 
@@ -70,14 +70,15 @@ function onChangeLevel(size, mines) {
     gGame.isFirstCkick = true
     gGame.isTimerOn = false
     onInitGame()
-    document.querySelector('.modalMsg').innerText = ''
 }
 
 function onHintMode() {
+    if (gGame.hintCount <= 0) return
     gGame.isHint = true
 }
 
 function onSafeClick() {
+    if (gGame.safeCount <= 0) return
     gGame.safeCount--
     var randCell = getRandSafeCell()
     randCell.isSafe = true
@@ -88,7 +89,6 @@ function onSafeClick() {
 }
 
 function hintMode(currI, currJ) {
-    // console.log('isHint')
     gGame.hintCount--
     negsRevealed(currI, currJ, true)
     setTimeout(negsRevealed, 1000, currI, currJ, false)
@@ -104,6 +104,7 @@ function gameOver(pos) {
     renderMood(pos)
 
 }
+
 //////////////////
 
 // function manuallyMines(){

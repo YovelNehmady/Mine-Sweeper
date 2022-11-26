@@ -38,7 +38,7 @@ function renderBoard(board) {
         if (!cell) cell = EMPTY
       } else cell = EMPTY
 
-      var classList = currCell.isShown? 'isShow' : ''
+      var classList = currCell.isShown ? 'isShow' : ''
       if (currCell.isSafe) classList = 'safe'
       if (currCell.isMarked) cell = FLAG
       strHTML += `<td class="cell ${classList}" oncontextmenu="onCellMarked(this,${i}, ${j})" onclick="onCellClicked(this,${i}, ${j})">${cell}</td>`
@@ -54,14 +54,25 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
-
+var gIsShownInHntMode = []
 function negsRevealed(cellI, cellJ, shown) {
-  console.log(shown)
   for (var i = cellI - 1; i <= cellI + 1; i++) {
     if (i < 0 || i >= glevel.size) continue
     for (var j = cellJ - 1; j <= cellJ + 1; j++) {
       if (j < 0 || j >= glevel.size) continue
+      if (shown) {
+        if (gBoard[i][j].isShown) gIsShownInHntMode.push({ i: i, j: j })
+      }
       gBoard[i][j].isShown = (shown) ? true : false
+    }
+  }
+  if (!shown){
+    var currI
+    var currJ
+    for (var i = 0; i < gIsShownInHntMode.length; i++) {
+     currI = gIsShownInHntMode[i].i
+     currJ = gIsShownInHntMode[i].j
+      gBoard[currI][currJ].isShown = true
     }
   }
   renderBoard(gBoard)
@@ -83,7 +94,6 @@ function renderHintCount() {
   document.querySelector('.hint').innerText = str
 }
 
-
 function renderSafeCount() {
   var str = ''
   for (var i = 0; i < gGame.safeCount; i++) {
@@ -103,12 +113,12 @@ function getRandSafeCell() {
   return cleearCells[getRandomInt(0, cleearCells.length)]
 }
 
-////to add renders for shown and markd
 function renderPageMsg() {
   renderHintCount()
   renderMood(NORMAL)
   renderLifeCount()
   renderSafeCount()
+  document.querySelector('.modalMsg').innerHTML = `<div class="modalMsg">There are <span>${glevel.mines}</span> Mines among us, lets reveal them all</div>`
 }
 
 
